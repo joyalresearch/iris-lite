@@ -1,0 +1,22 @@
+# Python virtual environment
+.venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Raw and processed satellite data
+data/raw/
+data/processed/
+
+# Generated outputs
+outputs/
+
+# Jupyter temporary files
+.ipynb_checkpoints/
+
+# Environment variables / secrets
+.env
+
+# Private interview preparation
+docs/interview_questions.md

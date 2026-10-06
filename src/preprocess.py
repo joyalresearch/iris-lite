@@ -1,9 +1,6 @@
 import numpy as np
 from rasterio.warp import reproject, Resampling
 
-def apply_raster_scaling(data, scale, offset):
-    """Convert stored raster values to physical values."""
-    return data * scale + offset
 
 
 

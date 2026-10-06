@@ -20,3 +20,6 @@ outputs/
 
 # Private interview preparation
 docs/interview_questions.md
+
+# Pytest cache
+.pytest_cache/

@@ -5,3 +5,4 @@ python-dotenv
 matplotlib
 psycopg[binary]
 pytest
+openeo

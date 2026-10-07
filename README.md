@@ -276,6 +276,20 @@ The project separates major processing responsibilities into small Python module
 
 The modules are intentionally separated so individual stages can be inspected, tested, and replaced independently.
 
+## End-to-End Sentinel-2 Analysis
+
+The main Sentinel-2 demonstration can be orchestrated with:
+
+`run_change_analysis.py`
+
+The script connects the reusable processing modules into the complete demonstration workflow:
+
+**Sentinel-2 rasters -> preprocessing and quality masking -> NDVI -> temporal change -> GeoTIFF/COG export -> visualization -> PostGIS registration**
+
+The script currently uses the fixed demonstration dates, raster paths, analysis window, and asset identifier used for the Witznitz case study. It is therefore a reproducible project runner rather than a general-purpose command-line interface.
+
+The required Sentinel-2 source rasters are intentionally excluded from Git because of their size.
+
 ## Sentinel-2 Processing Function
 
 The central reusable Sentinel-2 processing function is:

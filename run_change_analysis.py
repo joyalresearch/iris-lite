@@ -57,8 +57,8 @@ plot_ndvi_change(
     output_path="outputs/ndvi_change_2021_2024.png",
 )
 
-print(f"Mean ΔNDVI: {change['mean_change']:.4f}")
-print(f"Median ΔNDVI: {change['median_change']:.4f}")
+print(f"Mean NDVI change: {change['mean_change']:.4f}")
+print(f"Median NDVI change: {change['median_change']:.4f}")
 print(
     f"Pixels decreased: "
     f"{change['decreased_fraction']:.2%}"

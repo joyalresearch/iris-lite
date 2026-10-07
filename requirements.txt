@@ -1,0 +1,7 @@
+numpy
+rasterio
+requests
+python-dotenv
+matplotlib
+psycopg[binary]
+pytest

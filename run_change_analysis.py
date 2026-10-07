@@ -8,6 +8,9 @@ from src.change_detection import calculate_ndvi_change
 from src.pipeline import process_sentinel2_window
 from src.visualization import plot_ndvi_change
 
+from src.postgis_loader import connect_postgis, insert_change_product
+from src.preprocess import get_footprint_wkt
+
 
 window = Window(1900, 2902, 100, 100)
 
@@ -48,7 +51,6 @@ cog_path = export_cog(
     "outputs/ndvi_change_2021_2024_cog.tif",
 )
 
-Path("outputs").mkdir(exist_ok=True)
 
 plot_ndvi_change(
     change,
@@ -64,3 +66,27 @@ print(
 print("Saved: outputs/ndvi_change_2021_2024.png")
 print("GeoTIFF:", geotiff_path)
 print("COG:", cog_path)
+
+
+
+footprint_wkt = get_footprint_wkt(
+    change["change"].shape,
+    change["transform"],
+    change["crs"],
+)
+
+conn = connect_postgis()
+
+product_id = insert_change_product(
+    conn=conn,
+    asset_id=1,
+    before_date="2021-06-17",
+    after_date="2024-06-26",
+    change_result=change,
+    cog_path=cog_path,
+    footprint_wkt=footprint_wkt,
+)
+
+conn.close()
+
+print(f"PostGIS product ID: {product_id}")

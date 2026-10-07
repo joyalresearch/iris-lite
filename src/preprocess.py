@@ -1,5 +1,6 @@
 import numpy as np
-from rasterio.warp import reproject, Resampling
+from rasterio.transform import array_bounds
+from rasterio.warp import reproject, Resampling, transform_bounds
 
 
 
@@ -50,3 +51,34 @@ def align_categorical_raster(
     )
 
     return destination
+
+
+def get_footprint_wkt(shape, transform, crs):
+    """Return a raster grid footprint as an EPSG:4326 WKT polygon."""
+
+    height, width = shape
+
+    left, bottom, right, top = array_bounds(
+        height,
+        width,
+        transform,
+    )
+
+    lon_left, lat_bottom, lon_right, lat_top = transform_bounds(
+        crs,
+        "EPSG:4326",
+        left,
+        bottom,
+        right,
+        top,
+    )
+
+    return (
+        f"POLYGON(("
+        f"{lon_left} {lat_bottom}, "
+        f"{lon_right} {lat_bottom}, "
+        f"{lon_right} {lat_top}, "
+        f"{lon_left} {lat_top}, "
+        f"{lon_left} {lat_bottom}"
+        f"))"
+    )

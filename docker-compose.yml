@@ -1,0 +1,18 @@
+services:
+  postgis:
+    image: postgis/postgis:17-3.5
+    container_name: iris-lite-postgis
+
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+
+    ports:
+      - "${POSTGRES_PORT}:5432"
+
+    volumes:
+      - iris_postgis_data:/var/lib/postgresql/data
+
+volumes:
+  iris_postgis_data:
